@@ -17,6 +17,9 @@ class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
 	#the OID that specifies the event generating the trap message
 	config :oid, :validate => :string, :default => "changeme"
 
+	config :yamlmibdir, :validate => :string
+
+
 	def initialize(*args)
 		super(*args)
 	end
@@ -50,12 +53,12 @@ class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
 		if !@yaml_mibs.empty?
 			trapsender_opts.merge!({:mib_dir => @yamlmibdir, :mib_modules => @yaml_mibs})
 		end
-		SNMP::Manager.open(@trapsender_opts) do |snmp|
+		SNMP::Manager.open(trapsender_opts) do |snmp|
 			#set it up and send the whole event as json for now
-			varbind = VarBind.new(@oid, OctetString.new(event.to_json))
-			snmp.set(@varbind)
+			varbind = SNMP::VarBind.new(@oid, SNMP::OctetString.new(event.to_json))
+			snmp.set(varbind)
 			#we dont actually care about the sys_up_time...do we
-			snmp.trap_v2(12345, @oid, @varbind)
+			snmp.trap_v2(12345, @oid, varbind)
 		end
 	end
 end
