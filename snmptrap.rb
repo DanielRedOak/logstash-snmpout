@@ -52,7 +52,7 @@ class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
 			#prep and do the full send
 			SNMP::Manager.open(trapsender_opts) do |snmp|
 				#set it up and send the whole event using the user specified codec
-				varbind = SNMP::VarBind.new(@oid, SNMP::OctetString.new(event)
+				varbind = SNMP::VarBind.new(@oid, SNMP::OctetString.new(event))
 				#we dont actually care about the sys_up_time...do we.  Also I am re-using the oid that was input.
 				snmp.trap_v2(12345, @oid, varbind)
 			end
