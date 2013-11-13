@@ -51,7 +51,9 @@ class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
 			trapsender_opts.merge!({:mib_dir => @yamlmibdir, :mib_modules => @yaml_mibs})
 		end
 		SNMP::Manager.open(@trapsender_opts) do |snmp|
-			#set it up and send the trap
+			#set it up and send the whole event as json for now
+			varbind = VarBind.new(@oid, OctetString.new(event.to_json)
+			snmp.set(@varbind)
 		end
 	end
 end
