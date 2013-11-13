@@ -4,6 +4,7 @@ logstash-snmpout
 SNMP Trap v2c Output for Logstash
 
 #Synopsis
+```
 output {
   snmpwalk {
     codec => ... # codec (optional), default: "line"
@@ -14,3 +15,4 @@ output {
     yamilmibdir => ... # string (optional)
   }
 }
+```
