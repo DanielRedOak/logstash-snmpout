@@ -52,7 +52,7 @@ class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
 		end
 		SNMP::Manager.open(@trapsender_opts) do |snmp|
 			#set it up and send the whole event as json for now
-			varbind = VarBind.new(@oid, OctetString.new(event.to_json)
+			varbind = VarBind.new(@oid, OctetString.new(event.to_json))
 			snmp.set(@varbind)
 			#we dont actually care about the sys_up_time...do we
 			snmp.trap_v2(12345, @oid, @varbind)
