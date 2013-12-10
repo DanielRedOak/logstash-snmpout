@@ -2,6 +2,19 @@ require "logstash/outputs/base"
 require "logstash/namespace"
 
 class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
+        
+        #USAGE:
+        #output {
+        #  snmpwalk {
+        #    codec => ... # codec (optional), default: "line"
+        #    host => ... # string (optional), default: "0.0.0.0"
+        #    port => ... # number (optional), default: "162"
+        #    community => ... # string (optional), default: "public"
+        #    oid => ... # string (required)
+        #    yamilmibdir => ... # string (optional)
+        #  }
+        #}
+
 	config_name "snmptrap"
 	milestone 1
 
