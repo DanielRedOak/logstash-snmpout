@@ -5,13 +5,13 @@ class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
         
  #USAGE:
  #output {
- #  snmpwalk {
+ #  snmptrap {
  #    codec => ... # codec (optional), default: "line"
  #    host => ... # string (optional), default: "0.0.0.0"
  #    port => ... # number (optional), default: "162"
  #    community => ... # string (optional), default: "public"
  #    oid => ... # string (required)
- #    yamilmibdir => ... # string (optional)
+ #    yamlmibdir => ... # string (optional)
  #  }
  #}
 
