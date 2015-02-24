@@ -79,6 +79,7 @@ class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
    finished
    return
   end
+  @oid = event.sprintf(@oid)
   @codec.encode(event)
  end
 end
