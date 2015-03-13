@@ -59,7 +59,7 @@ class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
    trapsender_opts = {:trap_port => @port, :host => @host, :community => @community }
 
    #check for and add user specified mibs
-   if !@yaml_mibs.empty?
+   if @yaml_mibs && !@yaml_mibs.empty?
     trapsender_opts.merge!({:mib_dir => @yamlmibdir, :mib_modules => @yaml_mibs})
    end
    #prep and do the full send
@@ -79,6 +79,7 @@ class LogStash::Outputs::Snmptrap < LogStash::Outputs::Base
    finished
    return
   end
+  @oid = event.sprintf(@oid)
   @codec.encode(event)
  end
 end
